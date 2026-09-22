@@ -20,6 +20,19 @@ void fillArray(int (&arr)[10])
 }
 
 /**
+ * @brief Выводит элементы массива на экран.
+ * @param arr Константная ссылка на массив из 10 целых чисел.
+ */
+void printArray(const int (&arr)[10])
+{
+    for (auto x : arr) {
+        std::cout << x << ' ';
+    }
+
+    std::cout << '\n';
+}
+
+/**
  * @brief Точка входа в программу.
  * @return Код завершения: 0 — успешное выполнение.
  */
@@ -28,8 +41,7 @@ int main()
     int numbers[10]{};
 
     fillArray(numbers);
-
-    std::cout << "Первый элемент: " << numbers[0] << '\n';
+    printArray(numbers);
 
     return 0;
 }
