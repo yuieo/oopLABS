@@ -48,7 +48,19 @@ int& getElement(SafeArray& arr, int index)
 }
 
 /**
- * @brief Демонстрирует присваивание через возвращаемую ссылку.
+ * @brief Выводит элементы массива без их изменения.
+ * @param arr Константная ссылка на структуру массива.
+ */
+void printSafe(const SafeArray& arr)
+{
+    for (int i = 0; i < arr.size; ++i) {
+        std::cout << arr.data[i] << ' ';
+    }
+    std::cout << '\n';
+}
+
+/**
+ * @brief Демонстрирует изменение и вывод безопасного массива.
  * @return 0 при успешном выполнении, 1 при ошибке ввода.
  */
 int main()
@@ -67,10 +79,7 @@ int main()
     getElement(myArr, 2) = 999;
 
     std::cout << "Массив после присваивания: ";
-    for (int i = 0; i < myArr.size; ++i) {
-        std::cout << myArr.data[i] << ' ';
-    }
-    std::cout << '\n';
+    printSafe(myArr);
 
     delete[] myArr.data;
     myArr.data = nullptr;
