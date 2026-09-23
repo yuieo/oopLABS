@@ -1,5 +1,5 @@
 /**
-* @file main3.cpp
+ * @file main3.cpp
  * @brief Работа со структурой безопасного массива.
  */
 
@@ -53,6 +53,10 @@ int& getElement(SafeArray& arr, int index)
  */
 void printSafe(const SafeArray& arr)
 {
+    if (arr.size == 0) {
+        std::cout << "Массив пуст";
+    }
+
     for (int i = 0; i < arr.size; ++i) {
         std::cout << arr.data[i] << ' ';
     }
@@ -60,7 +64,54 @@ void printSafe(const SafeArray& arr)
 }
 
 /**
- * @brief Демонстрирует изменение и вывод безопасного массива.
+ * @brief Изменяет размер массива, сохраняя оставшиеся элементы.
+ * @param arr Ссылка на изменяемую структуру массива.
+ * @param newSize Новый размер, не должен быть отрицательным.
+ * @note При уменьшении выводятся удаляемые элементы.
+ * @note При увеличении новые элементы заполняются нулями.
+ */
+void reSizeArray(SafeArray& arr, int newSize)
+{
+    if (newSize < 0) {
+        std::cout << "Ошибка: размер не может быть отрицательным.\n";
+        return;
+    }
+
+    if (newSize == arr.size) {
+        return;
+    }
+
+    int* newData = nullptr;
+
+    if (newSize > 0) {
+        newData = new int[newSize]{};
+    }
+
+    int copySize = arr.size;
+    if (newSize < copySize) {
+        copySize = newSize;
+    }
+
+    for (int i = 0; i < copySize; ++i) {
+        newData[i] = arr.data[i];
+    }
+
+    if (newSize < arr.size) {
+        std::cout << "Удаляемые элементы: ";
+        for (int i = newSize; i < arr.size; ++i) {
+            std::cout << arr.data[i] << ' ';
+        }
+        std::cout << '\n';
+    }
+
+    delete[] arr.data;
+
+    arr.data = newData;
+    arr.size = newSize;
+}
+
+/**
+ * @brief Демонстрирует доступ, вывод и изменение размера массива.
  * @return 0 при успешном выполнении, 1 при ошибке ввода.
  */
 int main()
@@ -79,6 +130,23 @@ int main()
     getElement(myArr, 2) = 999;
 
     std::cout << "Массив после присваивания: ";
+    printSafe(myArr);
+
+    int newSize{};
+
+    std::cout << "Введите новый размер массива: ";
+
+    if (!(std::cin >> newSize)) {
+        std::cout << "Ошибка: необходимо ввести целое число.\n";
+        delete[] myArr.data;
+        myArr.data = nullptr;
+        myArr.size = 0;
+        return 1;
+    }
+
+    reSizeArray(myArr, newSize);
+
+    std::cout << "Массив после вызова reSizeArray: ";
     printSafe(myArr);
 
     delete[] myArr.data;
