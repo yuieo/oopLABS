@@ -122,7 +122,24 @@ void printMatrix(int** matrix, int rows, int cols,
 }
 
 /**
- * @brief Демонстрирует три варианта вызова функции вывода.
+ * @brief Освобождает память строк, затем массива указателей.
+ * @param matrix Указатель на массив указателей на строки.
+ * @param rows Количество строк.
+ * @pre matrix указывает на таблицу, созданную allocateMatrix,
+ *      а rows соответствует количеству её строк.
+ * @note После вызова указатель вызывающего кода нужно обнулить.
+ */
+void freeMatrix(int** matrix, int rows)
+{
+    for (int i = 0; i < rows; ++i) {
+        delete[] matrix[i];
+    }
+
+    delete[] matrix;
+}
+
+/**
+ * @brief Создаёт, заполняет, выводит и удаляет таблицу оценок.
  * @return 0 при успешном выполнении, 1 при ошибке ввода.
  */
 int main()
@@ -164,11 +181,7 @@ int main()
         printMatrix(matrix, rows, cols, false, "Оценки без рамки");
     }
 
-    for (int i = 0; i < rows; ++i) {
-        delete[] matrix[i];
-    }
-
-    delete[] matrix;
+    freeMatrix(matrix, rows);
     matrix = nullptr;
 
     return exitCode;
