@@ -1,5 +1,5 @@
 /**
-* @file main4.cpp
+ * @file main4.cpp
  * @brief Работа с двумерным массивом оценок студентов.
  */
 
@@ -24,7 +24,29 @@ int** allocateMatrix(int rows, int cols)
 }
 
 /**
- * @brief Создаёт таблицу оценок и освобождает её память.
+ * @brief Заполняет таблицу оценками с клавиатуры.
+ * @param matrix Указатель на массив указателей на строки.
+ * @param rows Количество студентов.
+ * @param cols Количество предметов.
+ * @note При ошибке ввода функция завершает работу.
+ */
+void fillMatrix(int** matrix, int rows, int cols)
+{
+    for (int i = 0; i < rows; ++i) {
+        std::cout << "Студент " << i + 1 << ":\n";
+
+        for (int j = 0; j < cols; ++j) {
+            std::cout << "Оценка по предмету " << j + 1 << ": ";
+
+            if (!(std::cin >> matrix[i][j])) {
+                return;
+            }
+        }
+    }
+}
+
+/**
+ * @brief Создаёт и заполняет таблицу оценок.
  * @return 0 при успешном выполнении, 1 при ошибке ввода.
  */
 int main()
@@ -46,11 +68,17 @@ int main()
 
     int** matrix = allocateMatrix(rows, cols);
 
-    std::cout << "Создана таблица: "
-              << rows << " строк, "
-              << cols << " столбцов.\n";
+    fillMatrix(matrix, rows, cols);
 
-    std::cout << "Первый элемент: " << matrix[0][0] << '\n';
+    int exitCode = 0;
+
+    if (!std::cin) {
+        std::cout << "Ошибка: оценка должна быть целым числом.\n";
+        exitCode = 1;
+    } else {
+        std::cout << "Таблица заполнена.\n";
+        std::cout << "Первая оценка: " << matrix[0][0] << '\n';
+    }
 
     for (int i = 0; i < rows; ++i) {
         delete[] matrix[i];
@@ -59,5 +87,5 @@ int main()
     delete[] matrix;
     matrix = nullptr;
 
-    return 0;
+    return exitCode;
 }
