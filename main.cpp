@@ -23,6 +23,7 @@ void fillArray(int (&arr)[10])
  * @brief Выводит элементы массива на экран.
  * @param arr Константная ссылка на массив из 10 целых чисел.
  */
+
 void printArray(const int (&arr)[10])
 {
     for (auto x : arr) {
@@ -38,6 +39,7 @@ void printArray(const int (&arr)[10])
  * @param first Индекс первого элемента, переданный по ссылке.
  * @param second Индекс второго элемента, переданный по ссылке.
  */
+
 void swapElements(int (&arr)[10], const int& first, const int& second)
 {
     if (first < 0 || first >= 10 || second < 0 || second >= 10) {
@@ -51,9 +53,23 @@ void swapElements(int (&arr)[10], const int& first, const int& second)
 }
 
 /**
+ * @brief Умножает каждый элемент массива на 2.
+ * @param arr Ссылка на массив из 10 целых чисел.
+ * @pre Удвоенные значения должны помещаться в тип int.
+ */
+
+void multiplyByTwo(int (&arr)[10])
+{
+    for (int& x : arr) {
+        x *= 2;
+    }
+}
+
+/**
  * @brief Точка входа в программу.
  * @return Код завершения: 0 — успешное выполнение.
  */
+
 int main()
 {
     int numbers[10]{};
@@ -72,6 +88,11 @@ int main()
     swapElements(numbers, first, second);
 
     std::cout << "Массив после вызова swapElements: ";
+    printArray(numbers);
+
+    multiplyByTwo(numbers);
+
+    std::cout << "Массив после удвоения: ";
     printArray(numbers);
 
     return 0;
