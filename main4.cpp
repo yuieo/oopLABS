@@ -64,7 +64,9 @@ void printMatrix(int** matrix, int rows, int cols,
 
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < cols; ++j) {
-            int length = std::to_string(matrix[i][j]).length();
+            int length = static_cast<int>(
+                std::to_string(matrix[i][j]).length()
+            );
 
             if (length > cellWidth) {
                 cellWidth = length;
@@ -107,7 +109,20 @@ void printMatrix(int** matrix, int rows, int cols,
 }
 
 /**
- * @brief Создаёт, заполняет и выводит таблицу оценок.
+ * @brief Выводит таблицу с указанным заголовком и рамкой.
+ * @param matrix Указатель на массив указателей на строки.
+ * @param rows Количество строк.
+ * @param cols Количество столбцов.
+ * @param title Заголовок таблицы в виде строки символов.
+ */
+void printMatrix(int** matrix, int rows, int cols,
+                 const char* title)
+{
+    printMatrix(matrix, rows, cols, true, std::string(title));
+}
+
+/**
+ * @brief Демонстрирует три варианта вызова функции вывода.
  * @return 0 при успешном выполнении, 1 при ошибке ввода.
  */
 int main()
@@ -137,7 +152,16 @@ int main()
         std::cout << "Ошибка: оценка должна быть целым числом.\n";
         exitCode = 1;
     } else {
+        // Без дополнительных аргументов.
         printMatrix(matrix, rows, cols);
+        std::cout << '\n';
+
+        // Только с заголовком.
+        printMatrix(matrix, rows, cols, "Оценки студентов");
+        std::cout << '\n';
+
+        // Со всеми аргументами.
+        printMatrix(matrix, rows, cols, false, "Оценки без рамки");
     }
 
     for (int i = 0; i < rows; ++i) {
