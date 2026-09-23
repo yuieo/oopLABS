@@ -44,7 +44,7 @@ void process(int*& arr, int& size)
 }
 
 /**
- * @brief Создаёт, заполняет, обрабатывает и выводит массив.
+ * @brief Обрабатывает массив и демонстрирует проверку nullptr.
  * @return 0 при успешном выполнении, 1 при ошибке ввода.
  */
 int main()
@@ -92,6 +92,12 @@ int main()
 
     delete[] arr;
     arr = nullptr;
+
+    if (arr != nullptr) {
+        std::cout << "Значение по указателю: " << *arr << '\n';
+    } else {
+        std::cout << "Указатель равен nullptr. Доступ к элементу невозможен.\n";
+    }
 
     return 0;
 }
