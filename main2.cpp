@@ -6,7 +6,7 @@
 #include <iostream>
 
 /**
- * @brief Запрашивает размер массива.
+ * @brief Запрашивает размер, создаёт и удаляет динамический массив.
  * @return 0 при успешном выполнении, 1 при ошибке ввода.
  */
 int main()
@@ -20,7 +20,16 @@ int main()
         return 1;
     }
 
-    std::cout << "Размер массива: " << size << '\n';
+    int* arr = new int[size]{};
+
+    std::cout << "Созданный массив: ";
+    for (int i = 0; i < size; ++i) {
+        std::cout << arr[i] << ' ';
+    }
+    std::cout << '\n';
+
+    delete[] arr;
+    arr = nullptr;
 
     return 0;
 }
