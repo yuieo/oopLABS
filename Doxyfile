@@ -1,0 +1,18 @@
+PROJECT_NAME = "Лабораторная работа №1"
+PROJECT_BRIEF = "Массивы, ссылки и управление динамической памятью в C++"
+
+OUTPUT_DIRECTORY = docs
+OUTPUT_LANGUAGE = Russian
+
+INPUT = main.cpp main2.cpp main3.cpp main4.cpp
+INPUT_ENCODING = UTF-8
+
+GENERATE_HTML = YES
+GENERATE_LATEX = NO
+
+SOURCE_BROWSER = YES
+HAVE_DOT = NO
+
+WARNINGS = YES
+WARN_IF_UNDOCUMENTED = YES
+WARN_IF_DOC_ERROR = YES
