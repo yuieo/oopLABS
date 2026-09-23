@@ -1,5 +1,5 @@
 /**
-* @file main2.cpp
+ * @file main2.cpp
  * @brief Работа с одномерным динамическим массивом.
  */
 
@@ -44,7 +44,7 @@ void process(int*& arr, int& size)
 }
 
 /**
- * @brief Создаёт, заполняет и обрабатывает динамический массив.
+ * @brief Создаёт, заполняет, обрабатывает и выводит массив.
  * @return 0 при успешном выполнении, 1 при ошибке ввода.
  */
 int main()
@@ -78,6 +78,17 @@ int main()
     std::cout << '\n';
 
     process(arr, size);
+
+    std::cout << "Массив после обработки: ";
+
+    if (size == 0) {
+        std::cout << "пуст";
+    } else {
+        for (int i = 0; i < size; ++i) {
+            std::cout << arr[i] << ' ';
+        }
+    }
+    std::cout << '\n';
 
     delete[] arr;
     arr = nullptr;
