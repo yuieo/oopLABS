@@ -1,5 +1,5 @@
 /**
- * @file main3.cpp
+* @file main3.cpp
  * @brief Работа со структурой безопасного массива.
  */
 
@@ -48,7 +48,7 @@ int& getElement(SafeArray& arr, int index)
 }
 
 /**
- * @brief Создаёт массив и проверяет доступ к элементу по индексу.
+ * @brief Демонстрирует присваивание через возвращаемую ссылку.
  * @return 0 при успешном выполнении, 1 при ошибке ввода.
  */
 int main()
@@ -64,22 +64,13 @@ int main()
 
     SafeArray myArr = createArray(size);
 
-    std::cout << "Размер созданного массива: " << myArr.size << '\n';
+    getElement(myArr, 2) = 999;
 
-    int index{};
-
-    std::cout << "Введите индекс элемента: ";
-
-    if (!(std::cin >> index)) {
-        std::cout << "Ошибка: индекс должен быть целым числом.\n";
-        delete[] myArr.data;
-        myArr.data = nullptr;
-        myArr.size = 0;
-        return 1;
+    std::cout << "Массив после присваивания: ";
+    for (int i = 0; i < myArr.size; ++i) {
+        std::cout << myArr.data[i] << ' ';
     }
-
-    int& element = getElement(myArr, index);
-    std::cout << "Полученное значение: " << element << '\n';
+    std::cout << '\n';
 
     delete[] myArr.data;
     myArr.data = nullptr;
