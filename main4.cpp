@@ -4,6 +4,7 @@
  */
 
 #include <iostream>
+#include <string>
 
 /**
  * @brief Выделяет память под двумерный массив и обнуляет элементы.
@@ -46,7 +47,67 @@ void fillMatrix(int** matrix, int rows, int cols)
 }
 
 /**
- * @brief Создаёт и заполняет таблицу оценок.
+ * @brief Выводит таблицу с заголовком и необязательной рамкой.
+ * @param matrix Указатель на массив указателей на строки.
+ * @param rows Количество строк.
+ * @param cols Количество столбцов.
+ * @param showBorders Нужно ли выводить рамку; по умолчанию true.
+ * @param title Заголовок таблицы; по умолчанию "Matrix".
+ */
+void printMatrix(int** matrix, int rows, int cols,
+                 bool showBorders = true,
+                 std::string title = "Matrix")
+{
+    std::cout << title << '\n';
+
+    int cellWidth = 1;
+
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            int length = std::to_string(matrix[i][j]).length();
+
+            if (length > cellWidth) {
+                cellWidth = length;
+            }
+        }
+    }
+
+    int borderWidth = cols * (cellWidth + 1) + 3;
+
+    if (showBorders) {
+        for (int i = 0; i < borderWidth; ++i) {
+            std::cout << '*';
+        }
+        std::cout << '\n';
+    }
+
+    for (int i = 0; i < rows; ++i) {
+        if (showBorders) {
+            std::cout << "* ";
+        }
+
+        for (int j = 0; j < cols; ++j) {
+            std::cout.width(cellWidth);
+            std::cout << matrix[i][j] << ' ';
+        }
+
+        if (showBorders) {
+            std::cout << '*';
+        }
+
+        std::cout << '\n';
+    }
+
+    if (showBorders) {
+        for (int i = 0; i < borderWidth; ++i) {
+            std::cout << '*';
+        }
+        std::cout << '\n';
+    }
+}
+
+/**
+ * @brief Создаёт, заполняет и выводит таблицу оценок.
  * @return 0 при успешном выполнении, 1 при ошибке ввода.
  */
 int main()
@@ -76,8 +137,7 @@ int main()
         std::cout << "Ошибка: оценка должна быть целым числом.\n";
         exitCode = 1;
     } else {
-        std::cout << "Таблица заполнена.\n";
-        std::cout << "Первая оценка: " << matrix[0][0] << '\n';
+        printMatrix(matrix, rows, cols);
     }
 
     for (int i = 0; i < rows; ++i) {
