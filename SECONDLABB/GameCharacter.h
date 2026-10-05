@@ -28,6 +28,11 @@ public:
      * уровнем 1 и опытом 0.
      */
     GameCharacter();
+
+    /**
+     * @brief Выводит имя, здоровье, уровень и опыт персонажа.
+     */
+    void print() const;
 };
 
 #endif
