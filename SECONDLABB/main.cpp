@@ -25,6 +25,12 @@ int main()
     GameCharacter warriorCopy(warrior);
     warriorCopy.print();
 
+    std::cout << "\nЧтение характеристик воина через методы:\n";
+    std::cout << "Имя: " << warrior.getName() << '\n';
+    std::cout << "Здоровье: " << warrior.getHealth() << '\n';
+    std::cout << "Уровень: " << warrior.getLevel() << '\n';
+    std::cout << "Опыт: " << warrior.getExperience() << '\n';
+
     std::cout << '\n';
     try {
         GameCharacter invalidHero("Ошибка", -10.0, 1, 0);

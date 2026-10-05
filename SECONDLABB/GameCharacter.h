@@ -47,6 +47,30 @@ public:
     GameCharacter(const GameCharacter& other);
 
     /**
+     * @brief Возвращает имя персонажа.
+     * @return Копия имени персонажа.
+     */
+    std::string getName() const;
+
+    /**
+     * @brief Возвращает здоровье персонажа.
+     * @return Текущее здоровье.
+     */
+    double getHealth() const;
+
+    /**
+     * @brief Возвращает уровень персонажа.
+     * @return Текущий уровень.
+     */
+    int getLevel() const;
+
+    /**
+     * @brief Возвращает опыт персонажа.
+     * @return Накопленный опыт.
+     */
+    int getExperience() const;
+
+    /**
      * @brief Выводит имя, здоровье, уровень и опыт персонажа.
      */
     void print() const;

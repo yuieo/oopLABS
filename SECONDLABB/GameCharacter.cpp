@@ -37,6 +37,26 @@ GameCharacter::GameCharacter(const GameCharacter& other)
 {
 }
 
+std::string GameCharacter::getName() const
+{
+    return name;
+}
+
+double GameCharacter::getHealth() const
+{
+    return health;
+}
+
+int GameCharacter::getLevel() const
+{
+    return level;
+}
+
+int GameCharacter::getExperience() const
+{
+    return experience;
+}
+
 void GameCharacter::print() const
 {
     std::cout << "Имя: " << name << '\n';
