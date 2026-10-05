@@ -57,6 +57,36 @@ int GameCharacter::getExperience() const
     return experience;
 }
 
+bool GameCharacter::takeDamage(double damage)
+{
+    if (!std::isfinite(damage) || damage <= 0) {
+        return false;
+    }
+
+    if (damage >= health) {
+        health = 0;
+    } else {
+        health -= damage;
+    }
+
+    return true;
+}
+
+bool GameCharacter::heal(double amount)
+{
+    if (!std::isfinite(amount) || amount <= 0) {
+        return false;
+    }
+
+    if (amount >= 100 - health) {
+        health = 100;
+    } else {
+        health += amount;
+    }
+
+    return true;
+}
+
 void GameCharacter::print() const
 {
     std::cout << "Имя: " << name << '\n';
