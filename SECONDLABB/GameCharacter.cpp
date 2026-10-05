@@ -5,6 +5,7 @@
 
 #include "GameCharacter.h"
 
+#include <climits>
 #include <cmath>
 #include <iostream>
 #include <stdexcept>
@@ -84,6 +85,27 @@ bool GameCharacter::heal(double amount)
         health += amount;
     }
 
+    return true;
+}
+
+bool GameCharacter::addExperience(int amount)
+{
+    if (amount <= 0 || amount > INT_MAX - experience) {
+        return false;
+    }
+
+    experience += amount;
+    return true;
+}
+
+bool GameCharacter::levelUp()
+{
+    if (experience < 100 || level == INT_MAX) {
+        return false;
+    }
+
+    experience -= 100;
+    ++level;
     return true;
 }
 

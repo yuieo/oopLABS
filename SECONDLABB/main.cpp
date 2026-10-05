@@ -9,7 +9,7 @@
 #include <stdexcept>
 
 /**
- * @brief Демонстрирует создание персонажей, урон, лечение и проверки.
+ * @brief Демонстрирует создание персонажей и проверку их методов.
  * @return Код завершения: 0 — успешное выполнение.
  */
 int main()
@@ -61,7 +61,28 @@ int main()
     warrior.heal(1000);
     std::cout << "После лечения 1000: " << warrior.getHealth() << '\n';
 
-    std::cout << "\nВоин после изменений:\n";
+    std::cout << "\nОпыт и повышение уровня:\n";
+    if (!warrior.levelUp()) {
+        std::cout << "Повышение отклонено: 50 единиц опыта недостаточно.\n";
+    }
+    warrior.print();
+
+    warrior.addExperience(75);
+    std::cout << "После получения 75 опыта: " << warrior.getExperience() << '\n';
+    if (warrior.levelUp()) {
+        std::cout << "Уровень повышен до " << warrior.getLevel()
+                  << ", осталось опыта: " << warrior.getExperience() << '\n';
+    }
+
+    std::cout << "\nНекорректное добавление опыта:\n";
+    if (!warrior.addExperience(-10)) {
+        std::cout << "Отрицательное количество опыта отклонено.\n";
+    }
+    if (!warrior.addExperience(0)) {
+        std::cout << "Добавление 0 опыта отклонено.\n";
+    }
+
+    std::cout << "\nВоин после изменений и отклонённых операций:\n";
     warrior.print();
     std::cout << "\nПервый персонаж остался без изменений:\n";
     hero.print();
