@@ -21,6 +21,10 @@ int main()
     GameCharacter warrior("Воин", 80.0, 2, 50);
     warrior.print();
 
+    std::cout << "\nКопия воина:\n";
+    GameCharacter warriorCopy(warrior);
+    warriorCopy.print();
+
     std::cout << '\n';
     try {
         GameCharacter invalidHero("Ошибка", -10.0, 1, 0);

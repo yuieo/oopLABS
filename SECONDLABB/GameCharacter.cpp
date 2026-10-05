@@ -31,6 +31,12 @@ GameCharacter::GameCharacter(const std::string& newName, double newHealth,
     }
 }
 
+GameCharacter::GameCharacter(const GameCharacter& other)
+    : name(other.name), health(other.health),
+      level(other.level), experience(other.experience)
+{
+}
+
 void GameCharacter::print() const
 {
     std::cout << "Имя: " << name << '\n';

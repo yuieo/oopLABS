@@ -41,6 +41,12 @@ public:
                   int newLevel, int newExperience);
 
     /**
+     * @brief Создаёт независимую копию персонажа.
+     * @param other Персонаж, характеристики которого копируются.
+     */
+    GameCharacter(const GameCharacter& other);
+
+    /**
      * @brief Выводит имя, здоровье, уровень и опыт персонажа.
      */
     void print() const;
