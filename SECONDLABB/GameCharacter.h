@@ -17,10 +17,17 @@
 class GameCharacter
 {
 private:
-    std::string name = "Герой"; ///< Имя персонажа.
-    double health = 100.0;     ///< Текущее здоровье.
-    int level = 1;            ///< Уровень персонажа.
-    int experience = 0;       ///< Накопленный опыт.
+    std::string name; ///< Имя персонажа.
+    double health;    ///< Текущее здоровье.
+    int level;        ///< Уровень персонажа.
+    int experience;   ///< Накопленный опыт.
+
+public:
+    /**
+     * @brief Создаёт персонажа с именем «Герой», здоровьем 100,
+     * уровнем 1 и опытом 0.
+     */
+    GameCharacter();
 };
 
 #endif
