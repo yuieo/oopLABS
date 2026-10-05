@@ -30,6 +30,17 @@ public:
     GameCharacter();
 
     /**
+     * @brief Создаёт персонажа с заданными характеристиками.
+     * @param newName Имя персонажа.
+     * @param newHealth Конечное значение здоровья от 0 до 100.
+     * @param newLevel Уровень, не ниже 1.
+     * @param newExperience Неотрицательный опыт.
+     * @throws std::invalid_argument Если характеристики недопустимы.
+     */
+    GameCharacter(const std::string& newName, double newHealth,
+                  int newLevel, int newExperience);
+
+    /**
      * @brief Выводит имя, здоровье, уровень и опыт персонажа.
      */
     void print() const;
