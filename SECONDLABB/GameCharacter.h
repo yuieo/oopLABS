@@ -21,6 +21,7 @@ private:
     double health;    ///< Текущее здоровье.
     int level;        ///< Уровень персонажа.
     int experience;   ///< Накопленный опыт.
+    static int objectCount; ///< Количество существующих объектов класса.
 
 public:
     /**
@@ -45,6 +46,17 @@ public:
      * @param other Персонаж, характеристики которого копируются.
      */
     GameCharacter(const GameCharacter& other);
+
+    /**
+     * @brief Уменьшает счётчик при уничтожении персонажа.
+     */
+    ~GameCharacter();
+
+    /**
+     * @brief Возвращает количество существующих персонажей.
+     * @return Общее количество объектов класса.
+     */
+    static int getObjectCount();
 
     /**
      * @brief Возвращает имя персонажа.

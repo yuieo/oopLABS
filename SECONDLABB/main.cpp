@@ -14,6 +14,8 @@
  */
 int main()
 {
+    std::cout << "Объектов до создания: " << GameCharacter::getObjectCount() << '\n';
+
     GameCharacter hero;
     hero.print();
 
@@ -24,6 +26,8 @@ int main()
     std::cout << "\nКопия воина:\n";
     GameCharacter warriorCopy(warrior);
     warriorCopy.print();
+
+    std::cout << "Объектов после создания: " << GameCharacter::getObjectCount() << '\n';
 
     std::cout << "\nЧтение характеристик воина через методы:\n";
     std::cout << "Имя: " << warrior.getName() << '\n';
@@ -38,6 +42,7 @@ int main()
     catch (const std::invalid_argument& error) {
         std::cout << "Ошибка создания: " << error.what() << '\n';
     }
+    std::cout << "Объектов после ошибки создания: " << GameCharacter::getObjectCount() << '\n';
 
     std::cout << "\nУрон и лечение воина:\n";
     warrior.takeDamage(30);
@@ -88,6 +93,14 @@ int main()
     hero.print();
     std::cout << "\nКопия воина осталась без изменений:\n";
     warriorCopy.print();
+
+    std::cout << "\nПроверка времени жизни объекта:\n";
+    std::cout << "До блока: " << GameCharacter::getObjectCount() << '\n';
+    {
+        GameCharacter temporary;
+        std::cout << "Внутри блока: " << GameCharacter::getObjectCount() << '\n';
+    }
+    std::cout << "После блока: " << GameCharacter::getObjectCount() << '\n';
 
     return 0;
 }

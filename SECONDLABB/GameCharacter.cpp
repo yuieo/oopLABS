@@ -10,9 +10,12 @@
 #include <iostream>
 #include <stdexcept>
 
+int GameCharacter::objectCount = 0;
+
 GameCharacter::GameCharacter()
     : name("Герой"), health(100.0), level(1), experience(0)
 {
+    ++objectCount;
 }
 
 GameCharacter::GameCharacter(const std::string& newName, double newHealth,
@@ -30,12 +33,25 @@ GameCharacter::GameCharacter(const std::string& newName, double newHealth,
     if (experience < 0) {
         throw std::invalid_argument("Опыт не может быть отрицательным.");
     }
+
+    ++objectCount;
 }
 
 GameCharacter::GameCharacter(const GameCharacter& other)
     : name(other.name), health(other.health),
       level(other.level), experience(other.experience)
 {
+    ++objectCount;
+}
+
+GameCharacter::~GameCharacter()
+{
+    --objectCount;
+}
+
+int GameCharacter::getObjectCount()
+{
+    return objectCount;
 }
 
 std::string GameCharacter::getName() const
