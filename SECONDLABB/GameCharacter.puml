@@ -1,0 +1,39 @@
+@startuml
+
+skinparam monochrome true
+skinparam classAttributeIconSize 0
+hide circle
+
+class GameCharacter {
+    - name : std::string
+    - health : double
+    - level : int
+    - experience : int
+    {static} - objectCount : int
+    --
+    + GameCharacter()
+    + GameCharacter(const std::string&, double, int, int)
+    + GameCharacter(const GameCharacter&)
+    + ~GameCharacter()
+    --
+    {static} + getObjectCount() : int
+    + getName() const : std::string
+    + getHealth() const : double
+    + getLevel() const : int
+    + getExperience() const : int
+    --
+    + takeDamage(damage : double) : bool
+    + heal(amount : double) : bool
+    + addExperience(amount : int) : bool
+    + levelUp() : bool
+    + print() const : void
+}
+
+note bottom of GameCharacter
+    Условия корректности:
+    health — конечное число от 0 до 100
+    level >= 1
+    experience >= 0
+end note
+
+@enduml
