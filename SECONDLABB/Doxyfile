@@ -1,0 +1,21 @@
+PROJECT_NAME = "Лабораторная работа №2"
+PROJECT_BRIEF = "Вариант 12: игровой персонаж GameCharacter"
+
+OUTPUT_DIRECTORY = docs
+OUTPUT_LANGUAGE = Russian
+
+INPUT = GameCharacter.h GameCharacter.cpp main.cpp
+INPUT_ENCODING = UTF-8
+EXTRACT_PRIVATE = YES
+IMAGE_PATH = .
+
+GENERATE_HTML = YES
+GENERATE_LATEX = NO
+
+SOURCE_BROWSER = YES
+HAVE_DOT = NO
+
+QUIET = YES
+WARNINGS = YES
+WARN_IF_UNDOCUMENTED = YES
+WARN_IF_DOC_ERROR = YES
