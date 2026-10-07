@@ -1,6 +1,6 @@
 /**
  * @file GameCharacter.cpp
- * @brief Реализация класса игрового персонажа.
+ * @brief Реализация классов имени и игрового персонажа.
  */
 
 #include "GameCharacter.h"
@@ -10,15 +10,40 @@
 #include <iostream>
 #include <stdexcept>
 
+CharacterName::CharacterName()
+    : name("Герой"), adjective("Великий")
+{
+}
+
+CharacterName::CharacterName(const std::string& newName, const std::string& newAdjective)
+    : name(newName), adjective(newAdjective)
+{
+}
+
+std::string CharacterName::getName() const
+{
+    return name;
+}
+
+std::string CharacterName::getAdjective() const
+{
+    return adjective;
+}
+
+std::string CharacterName::getFullName() const
+{
+    return adjective + " " + name;
+}
+
 int GameCharacter::objectCount = 0;
 
 GameCharacter::GameCharacter()
-    : name("Герой"), health(100.0), level(1), experience(0)
+    : name(), health(100.0), level(1), experience(0)
 {
     ++objectCount;
 }
 
-GameCharacter::GameCharacter(const std::string& newName, double newHealth,
+GameCharacter::GameCharacter(const CharacterName& newName, double newHealth,
                              int newLevel, int newExperience)
     : name(newName), health(newHealth), level(newLevel), experience(newExperience)
 {
@@ -54,7 +79,7 @@ int GameCharacter::getObjectCount()
     return objectCount;
 }
 
-std::string GameCharacter::getName() const
+CharacterName GameCharacter::getName() const
 {
     return name;
 }
@@ -127,7 +152,7 @@ bool GameCharacter::levelUp()
 
 void GameCharacter::print() const
 {
-    std::cout << "Имя: " << name << '\n';
+    std::cout << "Имя: " << name.getFullName() << '\n';
     std::cout << "Здоровье: " << health << '\n';
     std::cout << "Уровень: " << level << '\n';
     std::cout << "Опыт: " << experience << '\n';

@@ -1,6 +1,6 @@
 /**
  * @file GameCharacter.h
- * @brief Объявление класса игрового персонажа.
+ * @brief Объявления классов имени и игрового персонажа.
  */
 
 /**
@@ -10,7 +10,8 @@
  *
  * @section domain Описание предметной области
  * Объект GameCharacter представляет одного игрового персонажа.
- * Его характеризуют имя, здоровье, уровень и накопленный опыт.
+ * Его характеризуют имя с прилагательным, здоровье, уровень и накопленный опыт.
+ * Пользовательский тип CharacterName хранит само имя и прилагательное.
  * Персонаж может получать урон, лечиться, получать опыт и повышать уровень.
  * Недопустимы здоровье вне диапазона от 0 до 100 или неконечное здоровье,
  * уровень ниже 1 и отрицательный опыт.
@@ -19,7 +20,7 @@
  * Элемент | Описание
  * --- | ---
  * Имя класса | GameCharacter
- * Поля | name: std::string; health: double; level: int; experience: int
+ * Поля | name: CharacterName; health: double; level: int; experience: int
  * Конструкторы | Без аргументов, параметризованный, копирующий
  * Методы чтения | getName(), getHealth(), getLevel(), getExperience(), print()
  * Методы изменения | takeDamage(), heal(), addExperience(), levelUp()
@@ -40,6 +41,37 @@
 #include <string>
 
 /**
+ * @brief Имя персонажа и описывающее его прилагательное.
+ */
+class CharacterName
+{
+private:
+    std::string name;      ///< Само имя персонажа.
+    std::string adjective; ///< Прилагательное перед именем.
+
+public:
+    /** @brief Создаёт имя «Великий Герой». */
+    CharacterName();
+
+    /**
+     * @brief Создаёт имя с заданным прилагательным.
+     * @param newName Само имя персонажа.
+     * @param newAdjective Прилагательное перед именем.
+     */
+    CharacterName(const std::string& newName, const std::string& newAdjective);
+
+    /** @brief Возвращает само имя. @return Копия имени. */
+    std::string getName() const;
+
+    /** @brief Возвращает прилагательное. @return Копия прилагательного. */
+    std::string getAdjective() const;
+
+    /** @brief Соединяет прилагательное и имя. @return Полное имя персонажа. */
+    std::string getFullName() const;
+};
+
+
+/**
  * @brief Игровой персонаж с именем, здоровьем, уровнем и опытом.
  * @invariant Здоровье находится в диапазоне от 0 до 100.
  * @invariant Уровень не ниже 1.
@@ -48,7 +80,7 @@
 class GameCharacter
 {
 private:
-    std::string name; ///< Имя персонажа.
+    CharacterName name; ///< Имя персонажа с прилагательным.
     double health;    ///< Текущее здоровье.
     int level;        ///< Уровень персонажа.
     int experience;   ///< Накопленный опыт.
@@ -56,20 +88,20 @@ private:
 
 public:
     /**
-     * @brief Создаёт персонажа с именем «Герой», здоровьем 100,
+     * @brief Создаёт персонажа с именем «Великий Герой», здоровьем 100,
      * уровнем 1 и опытом 0.
      */
     GameCharacter();
 
     /**
      * @brief Создаёт персонажа с заданными характеристиками.
-     * @param newName Имя персонажа.
+     * @param newName Имя персонажа с прилагательным.
      * @param newHealth Конечное значение здоровья от 0 до 100.
      * @param newLevel Уровень, не ниже 1.
      * @param newExperience Неотрицательный опыт.
      * @throws std::invalid_argument Если характеристики недопустимы.
      */
-    GameCharacter(const std::string& newName, double newHealth,
+    GameCharacter(const CharacterName& newName, double newHealth,
                   int newLevel, int newExperience);
 
     /**
@@ -91,9 +123,9 @@ public:
 
     /**
      * @brief Возвращает имя персонажа.
-     * @return Копия имени персонажа.
+     * @return Копия объекта имени с прилагательным.
      */
-    std::string getName() const;
+    CharacterName getName() const;
 
     /**
      * @brief Возвращает здоровье персонажа.
