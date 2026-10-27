@@ -214,6 +214,66 @@ public:
         return old;
     }
 
+    /**
+     * @brief Проверяет равенство сумм.
+     * @param other Сравниваемая сумма.
+     * @return true, если суммы равны.
+     */
+    bool operator==(const Money& other) const
+    {
+        return totalKopecks == other.totalKopecks;
+    }
+
+    /**
+     * @brief Проверяет неравенство сумм.
+     * @param other Сравниваемая сумма.
+     * @return true, если суммы различаются.
+     */
+    bool operator!=(const Money& other) const
+    {
+        return totalKopecks != other.totalKopecks;
+    }
+
+    /**
+     * @brief Проверяет, меньше ли текущая сумма.
+     * @param other Сравниваемая сумма.
+     * @return true, если текущая сумма меньше другой.
+     */
+    bool operator<(const Money& other) const
+    {
+        return totalKopecks < other.totalKopecks;
+    }
+
+    /**
+     * @brief Проверяет, больше ли текущая сумма.
+     * @param other Сравниваемая сумма.
+     * @return true, если текущая сумма больше другой.
+     */
+    bool operator>(const Money& other) const
+    {
+        return totalKopecks > other.totalKopecks;
+    }
+
+    /**
+     * @brief Проверяет, меньше ли текущая сумма или равна другой.
+     * @param other Сравниваемая сумма.
+     * @return true, если текущая сумма не больше другой.
+     */
+    bool operator<=(const Money& other) const
+    {
+        return totalKopecks <= other.totalKopecks;
+    }
+
+    /**
+     * @brief Проверяет, больше ли текущая сумма или равна другой.
+     * @param other Сравниваемая сумма.
+     * @return true, если текущая сумма не меньше другой.
+     */
+    bool operator>=(const Money& other) const
+    {
+        return totalKopecks >= other.totalKopecks;
+    }
+
     /** @brief Выводит сумму и увеличивает счётчик выводов. */
     void print() const
     {
@@ -225,7 +285,7 @@ public:
 
 int Money::objectCount = 0;
 
-/** @brief Демонстрирует объекты Money и арифметические операторы. @return Код завершения программы. */
+/** @brief Демонстрирует создание объектов и перегруженные операторы Money. @return Код завершения программы. */
 int main()
 {
     std::cout << "Объектов до создания: " << Money::getObjectCount() << '\n';
@@ -307,6 +367,14 @@ int main()
         (copy--).print();
         std::cout << "copy после copy--: ";
         copy.print();
+
+        std::cout << std::boolalpha;
+        std::cout << "copy == payment: " << (copy == payment) << '\n';
+        std::cout << "copy != payment: " << (copy != payment) << '\n';
+        std::cout << "amount < payment: " << (amount < payment) << '\n';
+        std::cout << "amount > payment: " << (amount > payment) << '\n';
+        std::cout << "copy <= payment: " << (copy <= payment) << '\n';
+        std::cout << "copy >= payment: " << (copy >= payment) << '\n';
 
         std::cout << "Объектов после создания: " << Money::getObjectCount() << '\n';
     }
