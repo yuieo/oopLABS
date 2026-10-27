@@ -84,6 +84,40 @@ public:
         return *this;
     }
 
+    /**
+     * @brief Умножает сумму на целое число.
+     * @param factor Неотрицательный множитель.
+     * @return Ссылка на изменённый объект.
+     * @throws std::invalid_argument Если множитель отрицательный.
+     * @throws std::overflow_error Если результат не помещается в long long.
+     */
+    Money& operator*=(long long factor)
+    {
+        if (factor < 0) {
+            throw std::invalid_argument("Множитель не может быть отрицательным.");
+        }
+        if (factor != 0 && totalKopecks > LLONG_MAX / factor) {
+            throw std::overflow_error("Сумма слишком большая.");
+        }
+        totalKopecks *= factor;
+        return *this;
+    }
+
+    /**
+     * @brief Делит сумму на целое число, отбрасывая доли копейки.
+     * @param divisor Положительный делитель.
+     * @return Ссылка на изменённый объект.
+     * @throws std::invalid_argument Если делитель равен нулю или отрицательный.
+     */
+    Money& operator/=(long long divisor)
+    {
+        if (divisor <= 0) {
+            throw std::invalid_argument("Делитель должен быть положительным.");
+        }
+        totalKopecks /= divisor;
+        return *this;
+    }
+
     /** @brief Выводит сумму и увеличивает счётчик выводов. */
     void print() const
     {
@@ -95,7 +129,7 @@ public:
 
 int Money::objectCount = 0;
 
-/** @brief Демонстрирует объекты Money и операторы +=, -=. @return Код завершения программы. */
+/** @brief Демонстрирует объекты Money и арифметические присваивания. @return Код завершения программы. */
 int main()
 {
     std::cout << "Объектов до создания: " << Money::getObjectCount() << '\n';
@@ -128,6 +162,23 @@ int main()
             std::cout << "Отказ: " << error.what() << '\n';
         }
         std::cout << "После отклонённой операции: ";
+        amount.print();
+
+        amount *= 3;
+        std::cout << "После умножения на 3: ";
+        amount.print();
+
+        amount /= 7;
+        std::cout << "После деления на 7: ";
+        amount.print();
+
+        try {
+            amount /= 0;
+        }
+        catch (const std::invalid_argument& error) {
+            std::cout << "Отказ: " << error.what() << '\n';
+        }
+        std::cout << "После попытки деления на ноль: ";
         amount.print();
 
         std::cout << "Объектов после создания: " << Money::getObjectCount() << '\n';
