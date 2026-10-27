@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-add_executable(THIRDLABBB main.cpp Money.cpp)
+add_executable(THIRDLABBB main.cpp Money.cpp BankAccount.cpp)
 
 # Явно указываем стандарт даже при совпадении со стандартом по умолчанию.
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")

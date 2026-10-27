@@ -1,9 +1,10 @@
 #include "Money.h"
+#include "BankAccount.h"
 
 #include <iostream>
 #include <stdexcept>
 
-/** @brief Демонстрирует создание объектов и перегруженные операторы Money. @return Код завершения программы. */
+/** @brief Демонстрирует операторы Money и создание банковского счёта. @return Код завершения программы. */
 int main()
 {
     std::cout << "Объектов до создания: " << Money::getObjectCount() << '\n';
@@ -98,5 +99,11 @@ int main()
     }
 
     std::cout << "Объектов после уничтожения: " << Money::getObjectCount() << '\n';
+
+    {
+        BankAccount account("Иван");
+        account.print();
+    }
+
     return 0;
 }
