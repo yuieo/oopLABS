@@ -120,6 +120,22 @@ int main()
         }
         std::cout << "Счёт после отклонённой операции:\n";
         account.print();
+
+        BankAccount recipient("Анна");
+        account.transfer(recipient, Money(25000));
+        std::cout << "После перевода 250 рублей от Ивана Анне:\n";
+        account.print();
+        recipient.print();
+
+        try {
+            account.transfer(recipient, Money(100000));
+        }
+        catch (const std::invalid_argument& error) {
+            std::cout << "Отказ при переводе 1000 рублей: " << error.what() << '\n';
+        }
+        std::cout << "Счета после отклонённого перевода:\n";
+        account.print();
+        recipient.print();
     }
 
     return 0;

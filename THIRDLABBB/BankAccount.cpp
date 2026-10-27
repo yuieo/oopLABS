@@ -26,6 +26,22 @@ void BankAccount::withdraw(const Money& amount)
     balance -= amount;
 }
 
+void BankAccount::transfer(BankAccount& recipient, const Money& amount)
+{
+    if (this == &recipient) {
+        throw std::invalid_argument("Нельзя перевести деньги на тот же счёт.");
+    }
+    if (amount == Money(0)) {
+        throw std::invalid_argument("Сумма перевода должна быть положительной.");
+    }
+    if (amount > balance) {
+        throw std::invalid_argument("Недостаточно денег для перевода.");
+    }
+
+    recipient.balance += amount;
+    balance -= amount;
+}
+
 void BankAccount::print() const
 {
     std::cout << "Владелец счёта: " << owner << '\n';

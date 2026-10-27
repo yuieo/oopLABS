@@ -36,6 +36,17 @@ public:
      */
     void withdraw(const Money& amount);
 
+    /**
+     * @brief Переводит деньги на другой счёт.
+     * @param recipient Счёт получателя.
+     * @param amount Положительная сумма перевода.
+     * @throws std::invalid_argument При нулевой сумме, нехватке денег
+     * или переводе на тот же счёт.
+     * @throws std::overflow_error При переполнении баланса получателя.
+     * @note При отказе оба баланса сохраняются.
+     */
+    void transfer(BankAccount& recipient, const Money& amount);
+
     /** @brief Выводит владельца и баланс счёта. */
     void print() const;
 };
