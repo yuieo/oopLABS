@@ -3,6 +3,8 @@
 #ifndef MONEY_H
 #define MONEY_H
 
+#include <string>
+
 /** @brief Денежная сумма, хранящаяся в копейках. */
 class Money
 {
@@ -166,6 +168,9 @@ public:
      * @return true, если текущая сумма не меньше другой.
      */
     bool operator>=(const Money& other) const;
+
+    /** @brief Представляет сумму текстом. @return Строка с рублями и копейками. */
+    std::string toString() const;
 
     /** @brief Выводит сумму и увеличивает счётчик выводов. */
     void print() const;

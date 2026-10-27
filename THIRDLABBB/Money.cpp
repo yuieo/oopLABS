@@ -164,9 +164,14 @@ bool Money::operator>=(const Money& other) const
     return totalKopecks >= other.totalKopecks;
 }
 
+std::string Money::toString() const
+{
+    return std::to_string(totalKopecks / 100) + " руб. "
+           + std::to_string(totalKopecks % 100) + " коп.";
+}
+
 void Money::print() const
 {
     ++printCount;
-    std::cout << totalKopecks / 100 << " руб. "
-              << totalKopecks % 100 << " коп.\n";
+    std::cout << toString() << '\n';
 }

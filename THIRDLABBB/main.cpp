@@ -103,6 +103,7 @@ int main()
     {
         BankAccount account("Иван");
         account.print();
+        account.printHistory();
 
         account.deposit(Money(100000));
         std::cout << "После зачисления 1000 рублей:\n";
@@ -136,6 +137,9 @@ int main()
         std::cout << "Счета после отклонённого перевода:\n";
         account.print();
         recipient.print();
+
+        account.printHistory();
+        recipient.printHistory();
     }
 
     return 0;

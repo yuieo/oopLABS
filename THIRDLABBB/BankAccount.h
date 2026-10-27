@@ -6,13 +6,15 @@
 #include "Money.h"
 
 #include <string>
+#include <vector>
 
-/** @brief Банковский счёт с владельцем и балансом. */
+/** @brief Банковский счёт с владельцем, балансом и историей успешных операций. */
 class BankAccount
 {
 private:
     std::string owner; ///< Имя владельца счёта.
     Money balance; ///< Сумма на счёте.
+    std::vector<std::string> history; ///< Записи успешных операций за текущий запуск.
 
 public:
     /**
@@ -49,6 +51,9 @@ public:
 
     /** @brief Выводит владельца и баланс счёта. */
     void print() const;
+
+    /** @brief Выводит историю успешных операций в порядке выполнения. */
+    void printHistory() const;
 };
 
 #endif
