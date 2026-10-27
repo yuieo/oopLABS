@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdexcept>
 
 /** @brief Денежная сумма, хранящаяся в копейках. */
 class Money
@@ -12,6 +13,23 @@ public:
     {
     }
 
+    /**
+     * @brief Создаёт сумму из количества копеек.
+     * @param kopecks Неотрицательное количество копеек.
+     * @throws std::invalid_argument Если сумма отрицательная.
+     */
+    explicit Money(long long kopecks) : totalKopecks(kopecks)
+    {
+        if (kopecks < 0) {
+            throw std::invalid_argument("Сумма не может быть отрицательной.");
+        }
+    }
+
+    /** @brief Копирует сумму. @param other Копируемый объект. */
+    Money(const Money& other) : totalKopecks(other.totalKopecks)
+    {
+    }
+
     /** @brief Выводит сумму в рублях и копейках. */
     void print() const
     {
@@ -20,10 +38,17 @@ public:
     }
 };
 
-/** @brief Создаёт и выводит нулевую сумму. @return Код завершения программы. */
+/** @brief Демонстрирует три конструктора. @return Код завершения программы. */
 int main()
 {
     Money amount;
+    Money payment(12550);
+    Money copy(payment);
+
+    // Money wrong = 12550; // explicit запрещает неявное преобразование.
+
     amount.print();
+    payment.print();
+    copy.print();
     return 0;
 }
