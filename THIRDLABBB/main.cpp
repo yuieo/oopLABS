@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdexcept>
+#include <climits>
 
 /** @brief Денежная сумма, хранящаяся в копейках. */
 class Money
@@ -53,6 +54,36 @@ public:
         return printCount;
     }
 
+    /**
+     * @brief Прибавляет другую денежную сумму.
+     * @param other Прибавляемая сумма.
+     * @return Ссылка на изменённый объект.
+     * @throws std::overflow_error Если результат не помещается в long long.
+     */
+    Money& operator+=(const Money& other)
+    {
+        if (other.totalKopecks > LLONG_MAX - totalKopecks) {
+            throw std::overflow_error("Сумма слишком большая.");
+        }
+        totalKopecks += other.totalKopecks;
+        return *this;
+    }
+
+    /**
+     * @brief Вычитает другую денежную сумму.
+     * @param other Вычитаемая сумма.
+     * @return Ссылка на изменённый объект.
+     * @throws std::invalid_argument Если результат был бы отрицательным.
+     */
+    Money& operator-=(const Money& other)
+    {
+        if (other.totalKopecks > totalKopecks) {
+            throw std::invalid_argument("Нельзя вычесть больше имеющейся суммы.");
+        }
+        totalKopecks -= other.totalKopecks;
+        return *this;
+    }
+
     /** @brief Выводит сумму и увеличивает счётчик выводов. */
     void print() const
     {
@@ -64,7 +95,7 @@ public:
 
 int Money::objectCount = 0;
 
-/** @brief Демонстрирует время жизни объектов и mutable. @return Код завершения программы. */
+/** @brief Демонстрирует объекты Money и операторы +=, -=. @return Код завершения программы. */
 int main()
 {
     std::cout << "Объектов до создания: " << Money::getObjectCount() << '\n';
@@ -81,6 +112,23 @@ int main()
         payment.print();
         std::cout << "Выводов payment после обращения: " << payment.getPrintCount() << '\n';
         copy.print();
+
+        amount += payment;
+        std::cout << "После прибавления: ";
+        amount.print();
+
+        amount -= Money(2550);
+        std::cout << "После вычитания: ";
+        amount.print();
+
+        try {
+            amount -= payment;
+        }
+        catch (const std::invalid_argument& error) {
+            std::cout << "Отказ: " << error.what() << '\n';
+        }
+        std::cout << "После отклонённой операции: ";
+        amount.print();
 
         std::cout << "Объектов после создания: " << Money::getObjectCount() << '\n';
     }
