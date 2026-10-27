@@ -4,7 +4,7 @@
 #include <iostream>
 #include <stdexcept>
 
-/** @brief Демонстрирует операторы Money и создание банковского счёта. @return Код завершения программы. */
+/** @brief Демонстрирует операторы Money и операции банковского счёта. @return Код завершения программы. */
 int main()
 {
     std::cout << "Объектов до создания: " << Money::getObjectCount() << '\n';
@@ -102,6 +102,23 @@ int main()
 
     {
         BankAccount account("Иван");
+        account.print();
+
+        account.deposit(Money(100000));
+        std::cout << "После зачисления 1000 рублей:\n";
+        account.print();
+
+        account.withdraw(Money(25000));
+        std::cout << "После снятия 250 рублей:\n";
+        account.print();
+
+        try {
+            account.withdraw(Money(100000));
+        }
+        catch (const std::invalid_argument& error) {
+            std::cout << "Отказ при снятии 1000 рублей: " << error.what() << '\n';
+        }
+        std::cout << "Счёт после отклонённой операции:\n";
         account.print();
     }
 

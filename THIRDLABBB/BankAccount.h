@@ -21,6 +21,21 @@ public:
      */
     explicit BankAccount(const std::string& ownerName);
 
+    /**
+     * @brief Зачисляет деньги на счёт.
+     * @param amount Положительная сумма зачисления.
+     * @throws std::invalid_argument Если сумма равна нулю.
+     * @throws std::overflow_error Если баланс стал бы слишком большим.
+     */
+    void deposit(const Money& amount);
+
+    /**
+     * @brief Снимает деньги со счёта.
+     * @param amount Положительная сумма снятия.
+     * @throws std::invalid_argument Если сумма равна нулю или превышает баланс.
+     */
+    void withdraw(const Money& amount);
+
     /** @brief Выводит владельца и баланс счёта. */
     void print() const;
 };
