@@ -118,6 +118,54 @@ public:
         return *this;
     }
 
+    /**
+     * @brief Складывает суммы, не изменяя исходные объекты.
+     * @param other Второе слагаемое.
+     * @return Новая сумма. Ошибки сложения передаются из operator+=.
+     */
+    Money operator+(const Money& other) const
+    {
+        Money result(*this);
+        result += other;
+        return result;
+    }
+
+    /**
+     * @brief Вычитает сумму, не изменяя исходные объекты.
+     * @param other Вычитаемая сумма.
+     * @return Новая сумма. Ошибки вычитания передаются из operator-=.
+     */
+    Money operator-(const Money& other) const
+    {
+        Money result(*this);
+        result -= other;
+        return result;
+    }
+
+    /**
+     * @brief Умножает сумму на число, не изменяя исходный объект.
+     * @param factor Неотрицательный целый множитель.
+     * @return Новая сумма. Ошибки умножения передаются из operator*=.
+     */
+    Money operator*(long long factor) const
+    {
+        Money result(*this);
+        result *= factor;
+        return result;
+    }
+
+    /**
+     * @brief Делит сумму на число, не изменяя исходный объект.
+     * @param divisor Положительный целый делитель.
+     * @return Новая сумма без долей копейки. Ошибки передаются из operator/=.
+     */
+    Money operator/(long long divisor) const
+    {
+        Money result(*this);
+        result /= divisor;
+        return result;
+    }
+
     /** @brief Выводит сумму и увеличивает счётчик выводов. */
     void print() const
     {
@@ -129,7 +177,7 @@ public:
 
 int Money::objectCount = 0;
 
-/** @brief Демонстрирует объекты Money и арифметические присваивания. @return Код завершения программы. */
+/** @brief Демонстрирует объекты Money и арифметические операторы. @return Код завершения программы. */
 int main()
 {
     std::cout << "Объектов до создания: " << Money::getObjectCount() << '\n';
@@ -180,6 +228,21 @@ int main()
         }
         std::cout << "После попытки деления на ноль: ";
         amount.print();
+
+        std::cout << "payment + 24 руб. 50 коп.: ";
+        (payment + Money(2450)).print();
+
+        std::cout << "payment - 25 руб. 50 коп.: ";
+        (payment - Money(2550)).print();
+
+        std::cout << "payment * 2: ";
+        (payment * 2).print();
+
+        std::cout << "payment / 2: ";
+        (payment / 2).print();
+
+        std::cout << "Исходная сумма payment: ";
+        payment.print();
 
         std::cout << "Объектов после создания: " << Money::getObjectCount() << '\n';
     }
