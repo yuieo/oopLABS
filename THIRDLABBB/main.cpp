@@ -166,6 +166,54 @@ public:
         return result;
     }
 
+    /**
+     * @brief Префиксно прибавляет одну копейку.
+     * @return Ссылка на увеличенный объект.
+     * @throws std::overflow_error Если сумма уже максимальная.
+     */
+    Money& operator++()
+    {
+        *this += Money(1);
+        return *this;
+    }
+
+    /**
+     * @brief Постфиксно прибавляет одну копейку.
+     * @return Копия суммы до увеличения.
+     * @throws std::overflow_error Если сумма уже максимальная.
+     * @note Неименованный параметр int отличает постфиксную форму от префиксной.
+     */
+    Money operator++(int)
+    {
+        Money old(*this);
+        ++(*this);
+        return old;
+    }
+
+    /**
+     * @brief Префиксно вычитает одну копейку.
+     * @return Ссылка на уменьшенный объект.
+     * @throws std::invalid_argument Если сумма равна нулю.
+     */
+    Money& operator--()
+    {
+        *this -= Money(1);
+        return *this;
+    }
+
+    /**
+     * @brief Постфиксно вычитает одну копейку.
+     * @return Копия суммы до уменьшения.
+     * @throws std::invalid_argument Если сумма равна нулю.
+     * @note Неименованный параметр int отличает постфиксную форму от префиксной.
+     */
+    Money operator--(int)
+    {
+        Money old(*this);
+        --(*this);
+        return old;
+    }
+
     /** @brief Выводит сумму и увеличивает счётчик выводов. */
     void print() const
     {
@@ -243,6 +291,22 @@ int main()
 
         std::cout << "Исходная сумма payment: ";
         payment.print();
+
+        std::cout << "Результат ++copy: ";
+        (++copy).print();
+
+        std::cout << "Результат copy++ (старая сумма): ";
+        (copy++).print();
+        std::cout << "copy после copy++: ";
+        copy.print();
+
+        std::cout << "Результат --copy: ";
+        (--copy).print();
+
+        std::cout << "Результат copy-- (старая сумма): ";
+        (copy--).print();
+        std::cout << "copy после copy--: ";
+        copy.print();
 
         std::cout << "Объектов после создания: " << Money::getObjectCount() << '\n';
     }
