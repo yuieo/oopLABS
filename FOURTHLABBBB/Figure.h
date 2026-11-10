@@ -1,6 +1,7 @@
 #ifndef FIGURE_H
 #define FIGURE_H
 
+#include <cstddef>
 #include <string>
 
 #include "Drawable.h"
@@ -10,9 +11,12 @@ class Figure : public Drawable, public Colorable
 {
 private:
     std::string color;
+    static std::size_t createdCount;
+    static double averageArea;
 
 protected:
     explicit Figure(const std::string& initialColor);
+    static void recordCreation(double initialArea);
 
 public:
     ~Figure() override;
@@ -22,6 +26,11 @@ public:
 
     void setColor(const std::string& newColor) override;
     std::string getColor() const;
+
+    static std::size_t getCreatedCount();
+    static double getAverageArea();
+
+    friend bool haveSameColor(const Figure& first, const Figure& second);
 };
 
 #endif

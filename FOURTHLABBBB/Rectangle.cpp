@@ -29,9 +29,14 @@ namespace
 Rectangle::Rectangle(double width, double height, const std::string& initialColor)
     : Polygon(makeRectangleVertices(width, height), initialColor)
 {
+    recordCreation(Rectangle::area());
 }
 
-Rectangle::Rectangle(const Rectangle& other) = default;
+Rectangle::Rectangle(const Rectangle& other)
+    : Polygon(other)
+{
+    recordCreation(Rectangle::area());
+}
 
 Rectangle& Rectangle::operator=(const Rectangle& other)
 {
