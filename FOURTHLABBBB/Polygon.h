@@ -19,6 +19,8 @@ public:
 protected:
     Polygon(const std::vector<Point>& initialVertices,
             const std::string& initialColor);
+    Polygon(const Polygon& other);
+    Polygon& operator=(const Polygon& other);
 
 private:
     std::vector<Point> vertices;

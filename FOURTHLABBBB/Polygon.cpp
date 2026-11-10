@@ -8,6 +8,10 @@ Polygon::Polygon(const std::vector<Point>& initialVertices,
 {
 }
 
+Polygon::Polygon(const Polygon& other) = default;
+
+Polygon& Polygon::operator=(const Polygon& other) = default;
+
 std::size_t Polygon::getSideCount() const
 {
     return vertices.size();
@@ -20,8 +24,8 @@ const std::vector<Polygon::Point>& Polygon::getVertices() const
 
 void Polygon::draw() const
 {
-    std::cout << "color=" << getColor() << ", sides=" << getSideCount()
-              << ", area=" << area() << ", vertices:";
+    std::cout << "цвет=" << getColor() << ", сторон=" << getSideCount()
+              << ", площадь=" << area() << ", вершины:";
 
     for (const Point& point : vertices)
     {
