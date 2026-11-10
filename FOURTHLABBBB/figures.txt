@@ -1,0 +1,10 @@
+rectangle 3 2 красный
+rectangle 4 3 синий
+rectangle 5 2 зелёный
+rectangle 6 3 жёлтый
+rectangle 7 2 белый
+square 2 красный
+square 3 синий
+square 4 зелёный
+square 5 жёлтый
+square 6 белый
