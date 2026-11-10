@@ -1,3 +1,7 @@
+/**
+ * @file
+ * @brief Загрузка фигур из файла и проверки программы.
+ */
 #include "Rectangle.h"
 #include "Square.h"
 
@@ -11,8 +15,15 @@
 #include <string>
 #include <vector>
 
+/// @brief Список фигур, которыми владеют умные указатели.
 using Figures = std::vector<std::unique_ptr<Figure>>;
 
+/**
+ * @brief Проверяет условие теста.
+ * @param condition Условие успешной проверки.
+ * @param message Сообщение об ошибке.
+ * @throws std::runtime_error Если условие ложно.
+ */
 void check(bool condition, const char* message)
 {
     if (!condition)
@@ -21,6 +32,12 @@ void check(bool condition, const char* message)
     }
 }
 
+/**
+ * @brief Загружает десять фигур из figures.txt.
+ * @return Список прямоугольников и квадратов.
+ * @throws std::runtime_error Если файл недоступен или имеет неверный формат.
+ * @throws std::invalid_argument Если у фигуры недопустимые размеры.
+ */
 Figures loadFigures()
 {
     std::ifstream file("figures.txt");
@@ -70,6 +87,10 @@ Figures loadFigures()
     return figures;
 }
 
+/**
+ * @brief Проверяет статистику, виртуальный вывод и смену цвета через интерфейсы.
+ * @param figures Фигуры, считанные из файла.
+ */
 void testLoadedFigures(const Figures& figures)
 {
     std::cout << "Фигуры из файла\n";
@@ -97,6 +118,7 @@ void testLoadedFigures(const Figures& figures)
     drawable.draw();
 }
 
+/// @brief Проверяет независимость координат и цвета после копирования.
 void testCopying()
 {
     const Square original(3.0, "красный");
@@ -128,6 +150,7 @@ void testCopying()
     std::cout << "\nКопирование и присваивание проверены\n";
 }
 
+/// @brief Проверяет обработку исключения при нулевой ширине.
 void testInvalidDimensions()
 {
     const auto countBefore = Figure::getCreatedCount();
@@ -147,6 +170,10 @@ void testInvalidDimensions()
     throw std::runtime_error("Конструктор принял нулевую ширину");
 }
 
+/**
+ * @brief Загружает данные и запускает проверки.
+ * @return 0 при успехе или 1 при ошибке.
+ */
 int main()
 {
     try

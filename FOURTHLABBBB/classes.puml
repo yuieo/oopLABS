@@ -1,0 +1,69 @@
+@startuml
+title Лабораторная работа №4. Геометрические фигуры
+top to bottom direction
+skinparam classAttributeIconSize 0
+
+interface Drawable {
+    + ~Drawable()
+    + {abstract} draw() const: void
+}
+
+interface Colorable {
+    + ~Colorable()
+    + {abstract} setColor(newColor: const std::string&): void
+}
+
+abstract class Figure {
+    - color: std::string
+    - {static} createdCount: std::size_t
+    - {static} averageArea: double
+    # Figure(initialColor: const std::string&)
+    # {static} recordCreation(initialArea: double): void
+    + ~Figure()
+    + {abstract} area() const: double
+    + {abstract} draw() const: void
+    + setColor(newColor: const std::string&): void
+    + getColor() const: std::string
+    + {static} getCreatedCount(): std::size_t
+    + {static} getAverageArea(): double
+}
+
+abstract class Polygon {
+    + Point = std::pair<double, double>
+    - vertices: std::vector<Point>
+    # Polygon(initialVertices: const std::vector<Point>&, initialColor: const std::string&)
+    # Polygon(other: const Polygon&)
+    # operator=(other: const Polygon&): Polygon&
+    + getSideCount() const: std::size_t
+    + getVertices() const: const std::vector<Point>&
+    + draw() const: void
+}
+
+class Rectangle {
+    + Rectangle(width: double, height: double, initialColor: const std::string&)
+    + Rectangle(other: const Rectangle&)
+    + operator=(other: const Rectangle&): Rectangle&
+    + area() const: double
+    + draw() const: void
+    # requiresEqualSides() const: bool
+}
+
+class Square <<final>> {
+    + Square(side: double, initialColor: const std::string&)
+    + Square(other: const Square&)
+    + operator=(other: const Square&): Square&
+    + draw() const: void
+    # requiresEqualSides() const: bool
+}
+
+Drawable <|.. Figure
+Colorable <|.. Figure
+Figure <|-- Polygon
+Polygon <|-- Rectangle
+Rectangle <|-- Square
+
+note right of Figure
+  Дружественная функция:
+  haveSameColor(first, second): bool
+end note
+@enduml
